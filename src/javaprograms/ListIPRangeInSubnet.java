@@ -1,6 +1,5 @@
 package javaprograms;
 
-
 //This program will print subnet mask, broadcast ip, network ip, min and max host ip of the input network.
 public class ListIPRangeInSubnet {
 
@@ -52,7 +51,7 @@ public class ListIPRangeInSubnet {
         String[] input = args[0].split("/"); //Input should be of the format 192.20.10.5/22
         String ip = input[0];
         int subnetSize = Integer.parseInt(input[1]);
-        int networkSize = OCTET_SIZE - subnetSize;
+        int noOfHostBits = OCTET_SIZE - subnetSize;
         byte[] ipInByte = ListIPRangeInSubnet.ipToByte(ip);
         byte[] subnetMask = new byte[OCTET_SIZE];
         byte[] subnet = new byte[OCTET_SIZE];
@@ -60,19 +59,19 @@ public class ListIPRangeInSubnet {
         byte[] hostMin = new byte[OCTET_SIZE];
         byte[] hostMax = new byte[OCTET_SIZE];
 
-        for(int bitPosition=31; bitPosition >= networkSize; bitPosition--){
+        for(int bitPosition=31; bitPosition >= noOfHostBits; bitPosition--){
             subnetMask[bitPosition]=1;
         }
 
         for(int bitPosition=31; bitPosition>=0; bitPosition--){
             byte b = (byte)(ipInByte[bitPosition]&subnetMask[bitPosition]);
-            subnet[bitPosition]=b;
+            subnet[bitPosition] = b;
             broadcast[bitPosition] = b;
             hostMin[bitPosition] = b;
             hostMax[bitPosition] = b;
         }
 
-        for(int bitPosition=networkSize-1; bitPosition>=0; bitPosition--){
+        for(int bitPosition=noOfHostBits-1; bitPosition>=0; bitPosition--){
             broadcast[bitPosition]=1;
             hostMax[bitPosition] = 1;
         }
@@ -85,5 +84,6 @@ public class ListIPRangeInSubnet {
         System.out.println("Broadcast IP : " + byteToIp(broadcast));
         System.out.println("Host Min : " + byteToIp(hostMin));
         System.out.println("Host Max : " + byteToIp(hostMax));
+        System.out.println("No of Hosts in this network : " + Math.round(Math.pow(2, noOfHostBits) -2));
     }
 }
