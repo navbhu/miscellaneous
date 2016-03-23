@@ -1,7 +1,7 @@
 package javaprograms;
 
 //This program will print subnet mask, broadcast ip, network ip, min and max host ip of the input network.
-public class ListIPRangeInSubnet {
+public class IpSubnettingUsingBytes {
 
     private static final int OCTET_SIZE = 32;
 
@@ -52,7 +52,7 @@ public class ListIPRangeInSubnet {
         String ip = input[0];
         int subnetSize = Integer.parseInt(input[1]);
         int noOfHostBits = OCTET_SIZE - subnetSize;
-        byte[] ipInByte = ListIPRangeInSubnet.ipToByte(ip);
+        byte[] ipInByte = ipToByte(ip);
         byte[] subnetMask = new byte[OCTET_SIZE];
         byte[] subnet = new byte[OCTET_SIZE];
         byte[] broadcast = new byte[OCTET_SIZE];
