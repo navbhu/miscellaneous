@@ -28,7 +28,7 @@ public class Sortable {
                 lineNumber++;
             }
 
-            Set<Integer> lines = getResultForString(args[0]);
+            Set<Integer> lines = args.length > 0 ? getResultForString(args[0]) : getResultForString("Nikon D90");
             writeResultsToFile(lines);
 
         } catch (IOException e) {
