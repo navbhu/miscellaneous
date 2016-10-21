@@ -37,7 +37,7 @@ public class Sortable {
     }
 
     private static void writeResultsToFile(Set<Integer> set){
-        try (PrintWriter writer = new PrintWriter(System.getProperty("user.home") + "/result.txt")) {
+        try (PrintWriter writer = new PrintWriter(System.getProperty("user.dir") + "/result.txt")) {
             for(Integer i : set){
                 writer.println(getLineContent(i));
             }
