@@ -48,21 +48,18 @@ public class Sortable {
 
     private static Set<Integer> getResultForString(String query) {
         Set<Integer> result = new HashSet<>();
-        List<Integer> manufacturerList;
-        List<Integer> modelsList;
-        List<Integer> familyList;
+        List<Integer> lineNumberList = new ArrayList<>();
         for (String string : query.split(" ")) {
             String key = string.toLowerCase();
             if (MANUFACTURERS.containsKey(key)) {
-                manufacturerList = MANUFACTURERS.get(key);
-                result.addAll(manufacturerList);
+                lineNumberList = MANUFACTURERS.get(key);
             } else if (MODELS.containsKey(key)) {
-                modelsList = MODELS.get(key);
-                result.addAll(modelsList);
+                lineNumberList = MODELS.get(key);
             } else if (FAMILY.containsKey(key)) {
-                familyList = FAMILY.get(key);
-                result.addAll(familyList);
+                lineNumberList = FAMILY.get(key);
             }
+            result.addAll(lineNumberList);
+            lineNumberList.clear();
         }
         return result;
     }
